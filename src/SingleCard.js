@@ -4,7 +4,7 @@ import './SingleCard.css';
 class SingleCard extends Component {
 
 
-
+//show an image with getting src and two amounts for random style
   render() {
     return (
       <img className="singleCard" src={this.props.sr} alt={this.props.alt} 

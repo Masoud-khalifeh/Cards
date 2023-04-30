@@ -15,6 +15,8 @@ class Cards extends Component {
     this.addCard = this.addCard.bind(this);
     this.randomStyle=this.randomStyle.bind(this);
   }
+
+  //add a card to state.cardsarray in addition to two random amout for translate and rotate
   async addCard() {
     let newArray = this.state.cardsArray;
     await axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckInfo.deck_id}/draw/`).then(response => {
@@ -31,7 +33,7 @@ class Cards extends Component {
     
    
   }
-
+//get a positive or negative random number using for style
   randomStyle(max) {
     let randNum = Math.floor(Math.random() * max);
     let state=Math.floor(Math.random() * 2);
@@ -42,6 +44,7 @@ class Cards extends Component {
     }
   }
 
+  //get the deck info (deck_id) at first
   componentDidMount() {
     axios.get("https://deckofcardsapi.com/api/deck/new/shuffle").then(response => {
       this.setState({
