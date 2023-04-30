@@ -16,14 +16,20 @@ class Cards extends Component {
     this.randomStyle=this.randomStyle.bind(this);
   }
   async addCard() {
-
     let newArray = this.state.cardsArray;
     await axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckInfo.deck_id}/draw/`).then(response => {
       newArray.push({...response.data,rotate:this.randomStyle(80),translate:this.randomStyle(15)})
     });
-    this.setState(state => ({
-      cardsArray: newArray
-    }))
+
+    if((newArray[newArray.length-1].remaining===0&& !newArray[newArray.length-1].success)){
+      alert("The Cards Are Finished")
+    }else{
+      this.setState(state => ({
+        cardsArray: newArray
+      }))
+    }
+    
+   
   }
 
   randomStyle(max) {
@@ -61,8 +67,6 @@ class Cards extends Component {
               key={uuid() }
               rotate={img.rotate}
               translate={img.translate}
-              
-             
             />
           ))}
 
